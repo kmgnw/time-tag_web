@@ -26,6 +26,7 @@ const MainLayout = styled.div`
   justify-content: center;
   background-color: white;
   height: 100vh;
+  padding: 40px 0 40px 0;
 
   @media (min-width: 768px) {
     background-color: black;
