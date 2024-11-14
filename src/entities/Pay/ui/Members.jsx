@@ -34,6 +34,7 @@ const ProfileContainer = styled.div`
   align-items: center;
   position: relative;
   flex-direction: row;
+  margin-bottom: 40px;
 `;
 
 const ProfileWrap = styled.div`
