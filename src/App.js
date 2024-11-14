@@ -9,7 +9,7 @@ function App() {
     <MainLayout>
       <Router>
         <Routes>
-          <Route path="/pay" element={<Pay />} />
+          <Route path="/" element={<Pay />} />
           <Route path="/pay-processing" element={<PayProcessing />} />
           <Route path="/pay-completed" element={<PayCompleted />} />
         </Routes>
@@ -25,7 +25,7 @@ const MainLayout = styled.div`
   display: flex;
   justify-content: center;
   background-color: white;
-  min-height: 100vh;
+  height: 100vh;
 
   @media (min-width: 768px) {
     background-color: black;

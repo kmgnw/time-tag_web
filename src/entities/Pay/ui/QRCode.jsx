@@ -12,33 +12,38 @@ export default function QRCode() {
     let longPressTimer = null;
 
     const qrClickHandler = () => {
-        setIsLock(!isLock);
-    };
-
-    const qrLongPressHandler = () => {
-        if (!isLock) {
+        if(isLock){
+            setIsLock(!isLock);
+        }else{
             navigate('/pay-processing');
-        } else {
-            alert("잠금을 해제해 주세요.");
         }
+        
     };
 
-    const handleMouseDown = () => {
-        longPressTimer = setTimeout(() => {
-            qrLongPressHandler();
-        }, 800); 
-    };
+    // const qrLongPressHandler = () => {
+    //     if (!isLock) {
+            
+    //     } else {
+    //         alert("잠금을 해제해 주세요.");
+    //     }
+    // };
 
-    const handleMouseUp = () => {
-        clearTimeout(longPressTimer);
-    };
+    // const handleMouseDown = () => {
+    //     longPressTimer = setTimeout(() => {
+    //         qrLongPressHandler();
+    //     }, 800); 
+    // };
+
+    // const handleMouseUp = () => {
+    //     clearTimeout(longPressTimer);
+    // };
     
     return (
         <QRWrap
             onClick={qrClickHandler}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
+            // onMouseDown={handleMouseDown}
+            // onMouseUp={handleMouseUp}
+            // onMouseLeave={handleMouseUp}
             isLock={isLock}
         >
             <QRBackground
@@ -54,7 +59,7 @@ export default function QRCode() {
                 
             </QRBackground>
             {!isLock && 
-            <InfoText>가상 결제를 진행하기 위해 <br />QR 코드를 길게 눌러주세요.</InfoText>
+            <InfoText>가상 결제를 진행하기 위해 <br />QR 코드를 눌러주세요.</InfoText>
             }
         </QRWrap>
     );

@@ -8,7 +8,7 @@ export default function PayCompleted() {
     const navigate = useNavigate();
 
     function btnClickHandler() {
-        navigate('/pay');
+        navigate('/');
     }
 
     return (
