@@ -10,13 +10,26 @@ export default function PayProcessing() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Navigate to the next page after all members are displayed
+    const totalTime = members.reduce((acc, _, index) => {
+      // 누적된 시간 + 랜덤 추가 시간
+      const delay = acc + Math.random() * 500 + 300; // 최소 300ms, 최대 800ms
+      return delay;
+    }, 1000); // 초기 1000ms 대기
+
     const timer = setTimeout(() => {
       navigate('/pay-completed');
-    }, 350 * members.length + 1000); // Wait for all animations to complete plus a delay
+    }, totalTime);
 
     return () => clearTimeout(timer);
   }, [navigate, members]);
+
+  // 누적 딜레이 계산
+  const delays = members.reduce((acc, _, index) => {
+    const lastDelay = acc[index - 1] || 700; // 첫 번째는 초기 딜레이 1000ms
+    const nextDelay = lastDelay + Math.random() * 500 + 100; // 최소 300ms, 최대 800ms
+    acc.push(nextDelay);
+    return acc;
+  }, []);
 
   return (
     <MainLayout>
@@ -29,7 +42,12 @@ export default function PayProcessing() {
 
       <ListContainer>
         {members.map((member, index) => (
-          <AnimatedMember key={index} name={member} price="20,000원" delay={index * 350} />
+          <AnimatedMember
+            key={index}
+            name={member}
+            price="20,000원"
+            delay={delays[index]}
+          />
         ))}
       </ListContainer>
     </MainLayout>
@@ -41,7 +59,7 @@ function AnimatedMember({ name, price, delay }) {
     from: { transform: 'translateX(100%)', opacity: 0 },
     to: { transform: 'translateX(0%)', opacity: 1 },
     config: config.default,
-    delay, // Set delay for each member
+    delay, 
   });
 
   return (
