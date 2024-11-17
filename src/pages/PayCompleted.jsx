@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MemberCell from '../entities/PayProcessing/ui/MemberCell';
 import { useNavigate } from 'react-router-dom';
+import Checking from '../shared/Checking/Checking';
 
 export default function PayCompleted() {
     const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희', '정*아', '오*석'];
@@ -13,7 +14,11 @@ export default function PayCompleted() {
 
     return (
         <MainLayout>
-            <MainTitle>정산이<br />완료되었어요.</MainTitle>
+            <MainWrap>
+                <MainTitle>정산이<br />완료되었어요.</MainTitle>
+                <Checking />
+            </MainWrap>
+
             <Price>총 금액: 100,000원</Price>
 
             {members.map((member, index) => (
@@ -33,9 +38,14 @@ const MainLayout = styled.div`
   padding: 0px 20px;
 `;
 
+const MainWrap = styled.div`
+    display: flex;
+    margin-bottom: 24px;
+`
+
 const MainTitle = styled.div`
     margin-top: 110px;
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
     color: #212330;
     font-family: 'Pretendard-Bold';
     font-size: 36px;
@@ -49,6 +59,7 @@ const Price = styled.p`
   font-size: 20px;
   font-family: "Pretendard-Regular";
   margin-bottom: 32px;
+  margin-top: -3px;
 `;
 
 const CompleteButtonWrap = styled.div`

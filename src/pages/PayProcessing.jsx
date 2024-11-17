@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSpring, animated, config } from 'react-spring';
 import MemberCell from '../entities/PayProcessing/ui/MemberCell';
+import Loading from '../shared/Loading/Loading';
 
 export default function PayProcessing() {
   const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희', '정*아', '오*석'];
@@ -19,7 +20,11 @@ export default function PayProcessing() {
 
   return (
     <MainLayout>
-      <MainTitle>곧 정산이<br />완료될 거에요.</MainTitle>
+      <MainWrap>
+        <MainTitle>곧 정산이<br />완료될 거에요.</MainTitle>
+        <Loading />
+      </MainWrap>
+
       <Price>총 금액: 100,000원</Price>
 
       <ListContainer>
@@ -50,7 +55,13 @@ const MainLayout = styled.div`
   padding: 0px 20px;
 `;
 
+const MainWrap = styled.div`
+display: flex;
+align-items: baseline;
+`
+
 const MainTitle = styled.div`
+  width: 700px;
   color: #212330;
   font-family: "Pretendard-Bold";
   font-size: 36px;
@@ -59,7 +70,13 @@ const MainTitle = styled.div`
   letter-spacing: -0.9px;
   margin-top: 110px;
   margin-bottom: 24px;
+  word-wrap: break-word; /* 줄 바꿈 허용 */
+  word-break: break-word; /* 긴 단어도 줄 바꿈 */
 `;
+
+const LoadingWrap = styled.div`
+padding: 20px
+`
 
 const Price = styled.div`
   font-size: 20px;
