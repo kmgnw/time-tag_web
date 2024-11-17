@@ -119,7 +119,7 @@ const UnlockText = styled.span`
 const InfoText = styled.div`
 font-size: 12px;
 margin-top: 12px;
-font-weight: 350;
+font-family: 'Pretendard-Thin';
 position: absolute;
 top: 190px;
 line-height: 1.5;

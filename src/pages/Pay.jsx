@@ -87,17 +87,15 @@ const StyledBlurView = styled.div`
     padding: 20px;
 `;
 
-const MainTitle = styled.h1`
+const MainTitle = styled.div`
     font-size: 20px;
-    font-weight: 500;
-    font-family: "Pretendard-600";
-    margin-bottom: -20px;
+    font-family: "Pretendard-Bold";
+    margin-bottom: 0px;
 `;
 
-const SubTitle = styled.h2`
+const SubTitle = styled.div`
     font-size: 56px;
-    font-weight: 500;
-    font-family: "Pretendard-500";
+    font-family: "Pretendard-Regular";
     margin-bottom: 50px;
 `;
 
