@@ -73,5 +73,5 @@ const ListContainer = styled.div`
 
 const AnimatedMemberCell = styled(animated.div)`
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;

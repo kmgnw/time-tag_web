@@ -22,6 +22,7 @@ const MainLayout = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 5px
 `;
 
 const ProfileWrap = styled.div`

@@ -37,7 +37,7 @@ const MainTitle = styled.div`
     margin-top: 110px;
     margin-bottom: 24px;
     color: #212330;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Bold';
     font-size: 36px;
     font-style: normal;
     font-weight: 600;
@@ -47,7 +47,7 @@ const MainTitle = styled.div`
 
 const Price = styled.p`
   font-size: 20px;
-  font-family: "Pretendard-400";
+  font-family: "Pretendard-Regular";
   margin-bottom: 32px;
 `;
 
@@ -77,6 +77,6 @@ const CompleteButton = styled.button`
 
 const CompleteText = styled.span`
   font-size: 16px;
-  font-family: "Pretendard-600";
+  font-family: "Pretendard-Regular";
   color: white;
 `;
