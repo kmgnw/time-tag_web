@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BACK from '../../../assets/back.png'
-import LOGO from '../../../assets/logo.png'
+import LOGO from '../../../assets/logo_new_small.svg'
 import { useNavigate } from 'react-router-dom';
 
 export default function ToolBar({ title }) {
@@ -20,7 +20,10 @@ export default function ToolBar({ title }) {
 
       {/* Title Section */}
       <TitleSection>
-        <Logo src={LOGO} alt="logo" />
+        <LogoWrap>
+          <Logo src={LOGO} alt="logo" />  
+        </LogoWrap>
+        
         <StyledText>{title}</StyledText>
       </TitleSection>
 
@@ -39,31 +42,36 @@ const MainLayout = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   z-index: 10;
-  padding: 12px 20px;
+  padding: 12px 3px;
 `;
 
+const LogoWrap = styled.div`
+
+`
+
 const Logo = styled.img`
-  width: 28px;
-  height: 28px;
+position: relative;
+top: 1px;
+  // width: 28px;
+  // height: 28px;
 `;
 
 const TitleSection = styled.div`
   width: 88px;
   height: 34px;
-  background-color: #FFAC30;
+  background-color: #424143;
   border-radius: 100px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  padding: 3px 12px;
   position: relative;
+  padding: 3px 6px 3px 4px;
   top: 2px;
 `;
 
-const StyledText = styled.span`
+const StyledText = styled.div`
   color: #FFF;
   font-family: Pretendard, sans-serif;
   font-size: 18px;

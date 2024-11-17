@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ex_profile from '../../../assets/profile.png'
+import ex_profile from '../../../assets/profile_green.svg'
 
 export default function Members({ members, blurViewClickedHandler }) {
     return (
@@ -39,9 +39,6 @@ const ProfileContainer = styled.div`
 
 const ProfileWrap = styled.div`
   display: flex;
-  background-color: #FFF;
-  border: 1px solid #fff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
 `;
 
 const Profile = styled.img`

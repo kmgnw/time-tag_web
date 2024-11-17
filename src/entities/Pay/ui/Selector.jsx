@@ -64,7 +64,7 @@ const AnimatedSelectedBackground = styled.div`
   position: absolute;
   width: 110px;
   height: 48px;
-  background-color: #ffac30;
+  background-color: #18CD73;
   border-radius: 24px;
   top: 3px;
   left: 3px;

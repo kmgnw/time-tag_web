@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import QR_blur from '../../../assets/QR_blur.png'
 import QR from '../../../assets/QR.png'
-import lock from '../../../assets/lock.png'
+import lock from '../../../assets/lock_green.svg'
 import { useNavigate } from 'react-router-dom';
 
 export default function QRCode() {

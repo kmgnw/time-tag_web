@@ -65,7 +65,7 @@ const CompleteButtonWrap = styled.div`
 const CompleteButton = styled.button`
   width: 100%;
   padding: 0 20px;
-  background-color: #ffac30;
+  background-color: #18CD73;
   height: 56px;
   border-radius: 8px;
   border: none;
