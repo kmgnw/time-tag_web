@@ -5,7 +5,7 @@ import ToolBar from '../entities/Pay/ui/ToolBar';
 import QRCode from '../entities/Pay/ui/QRCode';
 import MemberInfo from '../entities/Pay/ui/MemberInfo';
 import Members from '../entities/Pay/ui/Members';
-import profile from '../assets/profile.png';
+import profile from '../assets/profile_green.svg';
 
 export default function Pay() {
 
