@@ -47,15 +47,14 @@ const MainTitle = styled.div`
     margin-top: 110px;
     // margin-bottom: 24px;
     color: #212330;
-    font-family: 'Pretendard-Bold';
+    font-family: "Pretendard-Bold";
     font-size: 36px;
     font-style: normal;
-    font-weight: 600;
     line-height: 44px; /* 122.222% */
     letter-spacing: -0.9px;
 `;
 
-const Price = styled.p`
+const Price = styled.div`
   font-size: 20px;
   font-family: "Pretendard-Regular";
   margin-bottom: 32px;
