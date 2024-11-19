@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Checking from '../shared/Checking/Checking';
 
 export default function PayCompleted() {
-    const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희', '정*아', '오*석'];
+    const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희'];
     const navigate = useNavigate();
 
     function btnClickHandler() {
@@ -15,11 +15,11 @@ export default function PayCompleted() {
     return (
         <MainLayout>
             <MainWrap>
-                <MainTitle>정산이<br />완료되었어요.</MainTitle>
+                <MainTitle>결제가<br />완료되었어요.</MainTitle>
                 <Checking />
             </MainWrap>
 
-            <Price>총 금액: 100,000원</Price>
+            <Price>총 금액: 120,000원</Price>
 
             {members.map((member, index) => (
                 <MemberCell key={index} name={member} price="20,000원" />

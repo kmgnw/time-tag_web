@@ -6,7 +6,7 @@ import MemberCell from '../entities/PayProcessing/ui/MemberCell';
 import Loading from '../shared/Loading/Loading';
 
 export default function PayProcessing() {
-  const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희', '정*아', '오*석'];
+  const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희'];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,11 +34,11 @@ export default function PayProcessing() {
   return (
     <MainLayout>
       <MainWrap>
-        <MainTitle>곧 정산이<br />완료될 거에요.</MainTitle>
+        <MainTitle>지금<br />결제 중이에요.</MainTitle>
         <Loading />
       </MainWrap>
 
-      <Price>총 금액: 100,000원</Price>
+      <Price>총 금액: 120,000원</Price>
 
       <ListContainer>
         {members.map((member, index) => (

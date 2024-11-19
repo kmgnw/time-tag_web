@@ -15,7 +15,7 @@ export default function Pay() {
         setIsBtnClicked(!isBtnClicked);
     }
 
-    const members = ['권*남', '권*남', '권*남', '권*남', '권*남', '권*남', '권*남', '권*남'];
+    const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희'];
 
     useEffect(() => {
         setIsBtnClicked(false);
