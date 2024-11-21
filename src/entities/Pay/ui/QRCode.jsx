@@ -5,7 +5,7 @@ import QR from '../../../assets/QR.png'
 import lock from '../../../assets/lock_green.svg'
 import { useNavigate } from 'react-router-dom';
 
-export default function QRCode() {
+export default function QRCode({dutch}) {
     const navigate = useNavigate()
 
     const [isLock, setIsLock] = useState(true);
@@ -16,6 +16,7 @@ export default function QRCode() {
             setIsLock(!isLock);
         }else{
             navigate('/pay-processing');
+            dutch();
         }
         
     };

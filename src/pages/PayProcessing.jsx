@@ -85,7 +85,8 @@ align-items: baseline;
 const MainTitle = styled.div`
   width: 700px;
   color: #212330;
-  font-family: "Pretendard-Bold";
+  font-family: "Pretendard";
+  font-weight: 600;
   font-size: 36px;
   font-style: normal;
   line-height: 44px; /* 122.222% */

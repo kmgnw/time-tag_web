@@ -10,6 +10,7 @@ import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import { useRecoilState } from 'recoil';
 import { membersState } from '../shared/state/recoil';
+import { useNavigate } from 'react-router-dom';
 
 export default function Pay() {
     const [isBtnClicked, setIsBtnClicked] = useState(true);
@@ -17,6 +18,7 @@ export default function Pay() {
     const [roomId, setRoomId] = useState(''); // URL에서 가져온 roomId 상태
     const stompClient = useRef(null); // stompClient를 useRef로 관리
     const subscriptions = useRef(new Map()); // 구독 관리 (초기값: 빈 Map)
+    const navigate = useNavigate()
 
     const [members, setMembers] = useRecoilState(membersState)
 
@@ -76,7 +78,7 @@ export default function Pay() {
             const topicSub = stompClient.current.subscribe(topicPath, (message) => {
                 const data = JSON.parse(message.body);
                 console.log("Message received on topic:", data);
-                if(data.type == "join"){
+                if (data.type == "join") {
                     // if (!isNameDisplayed) {
                     //     setUserData(data.result); // 처음 받은 이름을 표시
                     //     isNameDisplayed = true; // 한 번만 실행되도록 설정
@@ -85,20 +87,22 @@ export default function Pay() {
                     console.log(members)
                     setMembers((prev) => [...prev, data.result]);
                     console.log(members)
-                    
+
                 }
-                else if(data.type == "quit"){
+                else if (data.type == "quit") {
                     // deleteMember(data.result);
                     // showGroupInfo(memberData);
                     // checkQuit(data.result);
                 }
-                else if(data.type == "dutch"){
+                else if (data.type == "dutch") {
+                    unsubscribeAll();
+                    navigate('pay-processing')
                     // unsubscribeAll();
                     // resetData();            
                     // resetDiv();
                 }
 
-                else{
+                else {
                     console.error("알 수 없는 타입");
                 }
 
@@ -133,12 +137,33 @@ export default function Pay() {
         setIsBtnClicked(!isBtnClicked);
     }
 
+    // 모든 구독 취소 함수
+    const unsubscribeAll = () => {
+        subscriptions.current.forEach((subscription, path) => {
+            subscription.unsubscribe(); // 구독 취소
+            console.log(`Unsubscribed from ${path}`);
+        });
+        subscriptions.current.clear(); // Map 초기화
+    };
+
+    // 더치페이 처리
+    const dutch = () => {
+        if (stompClient.current) {
+            const dutchRoomRequest = {
+                tableNum: roomId, // 현재 roomId 사용
+            };
+
+            stompClient.current.send("/app/dutch", {}, JSON.stringify(dutchRoomRequest));
+            console.log("Dutch request sent");
+        }
+    };
+
     return (
         <MainLayout>
             <ContentWrapper isBlurred={isBtnClicked}>
                 <ToolBar title="Pay" />
                 <Selector />
-                <QRCode />
+                <QRCode dutch={dutch} />
                 <MemberInfo count={members.length} />
                 <Members members={members} blurViewClickedHandler={blurViewClickedHandler} />
             </ContentWrapper>
