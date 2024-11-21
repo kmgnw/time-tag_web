@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Selector from '../entities/Pay/ui/Selector';
 import ToolBar from '../entities/Pay/ui/ToolBar';
@@ -6,24 +6,109 @@ import QRCode from '../entities/Pay/ui/QRCode';
 import MemberInfo from '../entities/Pay/ui/MemberInfo';
 import Members from '../entities/Pay/ui/Members';
 import profile from '../assets/profile_green.svg';
+import SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
+import { useRecoilState } from 'recoil';
+import { membersState } from '../shared/state/recoil';
 
 export default function Pay() {
-
     const [isBtnClicked, setIsBtnClicked] = useState(true);
+    const [connectionStatus, setConnectionStatus] = useState("Connecting...");
+    const [roomId, setRoomId] = useState(''); // URL에서 가져온 roomId 상태
+    const stompClient = useRef(null); // stompClient를 useRef로 관리
+    const subscriptions = useRef(new Map()); // 구독 관리 (초기값: 빈 Map)
 
+    const [members, setMembers] = useRecoilState(membersState)
+
+    // URL에서 roomId 가져오기
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomIdFromURL = urlParams.get('roomId');
+        if (roomIdFromURL) {
+            setRoomId(roomIdFromURL);
+        }
+    }, []);
+
+    // WebSocket 연결
+    useEffect(() => {
+        setIsBtnClicked(false);
+
+        function connect() {
+            const socket = new SockJS('http://52.78.8.93:8080/ws'); // WebSocket 엔드포인트
+            const client = Stomp.over(socket); // Stomp 클라이언트 생성
+
+            client.connect(
+                {},
+                (frame) => {
+                    console.log('Connected:', frame);
+                    setConnectionStatus("Connected");
+                    stompClient.current = client;
+
+                    // 자동으로 방에 참여
+                    if (roomId) {
+                        joinRoom(roomId);
+                    }
+                },
+                (error) => {
+                    console.error('Connection error:', error);
+                    setConnectionStatus("Disconnected");
+                }
+            );
+        }
+
+        connect();
+
+        // 컴포넌트 언마운트 시 WebSocket 연결 해제
+        return () => {
+            if (stompClient.current) stompClient.current.disconnect();
+        };
+    }, [roomId]);
+
+    // 방 참여 로직
+    const joinRoom = (roomId) => {
+        if (stompClient.current) {
+            const joinRoomRequest = { tableNum: roomId };
+
+            const topicPath = `/topic/${roomId}`;
+            const queuePath = '/user/queue/reply';
+
+            // 토픽 구독
+            const topicSub = stompClient.current.subscribe(topicPath, (message) => {
+                const data = JSON.parse(message.body);
+                console.log("Message received on topic:", data);
+
+                if (data.result) {
+                    setMembers((prev) => [...prev, ...data.result]);
+                }
+            });
+            subscriptions.current.set(topicPath, topicSub);
+
+            // 개인 큐 구독
+            const queueSub = stompClient.current.subscribe(queuePath, (message) => {
+                const data = JSON.parse(message.body);
+                console.log("Message received on queue:", data);
+
+                initMemberData(data);
+            });
+            subscriptions.current.set(queuePath, queueSub);
+
+            stompClient.current.send('/app/join', {}, JSON.stringify(joinRoomRequest));
+            console.log(`Joined room: ${roomId}`);
+        }
+    };
+
+    // 멤버 데이터 초기화
+    const initMemberData = (data) => {
+        setMembers(data.dutchMembers || []);
+    };
+
+    // Blur View 핸들러
     function blurViewClickedHandler() {
         setIsBtnClicked(!isBtnClicked);
     }
 
-    const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희'];
-
-    useEffect(() => {
-        setIsBtnClicked(false);
-    }, []);
-
     return (
         <MainLayout>
-
             <ContentWrapper isBlurred={isBtnClicked}>
                 <ToolBar title="Pay" />
                 <Selector />
@@ -38,11 +123,14 @@ export default function Pay() {
                         <MainTitle>총 정산 인원</MainTitle>
                         <SubTitle>{members.length}명</SubTitle>
                         {members.map((e, i) => (
+                            <BlurText key={i}>{e.name}</BlurText> // 객체의 name 속성을 렌더링
+                        ))}
+                        {/* {members.map((e, i) => (
                             <ProfileWrap key={i}>
                                 <ProfileImage src={profile} alt="profile" />
                                 <BlurText>{e}</BlurText>
                             </ProfileWrap>
-                        ))}
+                        ))} */}
                     </StyledBlurView>
                 </BlurViewOverlay>
             )}
@@ -50,6 +138,7 @@ export default function Pay() {
     );
 }
 
+// Styled Components
 const MainLayout = styled.div`
     background-color: white;
     align-items: center;
@@ -121,4 +210,5 @@ const BlurText = styled.span`
     font-family: "Pretendard-400";
     position: relative;
     top: -2px;
+    margin-bottom: 15px;
 `;

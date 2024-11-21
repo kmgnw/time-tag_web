@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import MemberCell from '../entities/PayProcessing/ui/MemberCell';
 import { useNavigate } from 'react-router-dom';
 import Checking from '../shared/Checking/Checking';
+import { membersState } from '../shared/state/recoil';
+import { useRecoilValue } from 'recoil';
 
 export default function PayCompleted() {
-    const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희'];
+  const members = useRecoilValue(membersState);
+
+    const arrMembers = members.map(member => member.name);
     const navigate = useNavigate();
 
     function btnClickHandler() {
@@ -21,7 +25,7 @@ export default function PayCompleted() {
 
             <Price>총 금액: 120,000원</Price>
 
-            {members.map((member, index) => (
+            {arrMembers.map((member, index) => (
                 <MemberCell key={index} name={member} price="20,000원" />
             ))}
 

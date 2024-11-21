@@ -4,10 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSpring, animated, config } from 'react-spring';
 import MemberCell from '../entities/PayProcessing/ui/MemberCell';
 import Loading from '../shared/Loading/Loading';
+import { useRecoilValue } from 'recoil';
+import { membersState } from '../shared/state/recoil';
 
 export default function PayProcessing() {
-  const members = ['권*남', '김*수', '박*영', '이*민', '최*준', '장*희'];
+  const members = useRecoilValue(membersState)
+  
   const navigate = useNavigate();
+  let arrMembers = members.map(member => member.name);
 
   useEffect(() => {
     const totalTime = members.reduce((acc, _, index) => {
@@ -41,7 +45,7 @@ export default function PayProcessing() {
       <Price>총 금액: 120,000원</Price>
 
       <ListContainer>
-        {members.map((member, index) => (
+        {arrMembers.map((member, index) => (
           <AnimatedMember
             key={index}
             name={member}
@@ -59,7 +63,7 @@ function AnimatedMember({ name, price, delay }) {
     from: { transform: 'translateX(100%)', opacity: 0 },
     to: { transform: 'translateX(0%)', opacity: 1 },
     config: config.default,
-    delay, 
+    delay,
   });
 
   return (

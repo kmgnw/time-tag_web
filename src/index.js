@@ -1,12 +1,11 @@
-// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { RecoilRoot } from 'recoil';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css'
 
 ReactDOM.render(
-    <App />,
-  
+  <RecoilRoot>
+    <App />
+  </RecoilRoot>,
   document.getElementById('root')
 );
