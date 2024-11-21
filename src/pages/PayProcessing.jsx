@@ -104,7 +104,8 @@ padding: 20px
 
 const Price = styled.div`
   font-size: 20px;
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
+  font-weight: 500;
   margin-bottom: 32px;
   padding: 0 20px;
 `;

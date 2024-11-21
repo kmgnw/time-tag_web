@@ -62,7 +62,8 @@ const MainTitle = styled.div`
 
 const Price = styled.div`
   font-size: 20px;
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
+  font-weight: 500;
   margin-bottom: 32px;
   margin-top: -3px;
 `;

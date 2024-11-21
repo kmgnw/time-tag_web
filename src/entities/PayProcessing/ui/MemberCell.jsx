@@ -16,7 +16,6 @@ export default function MemberCell({ name, price }) {
 }
 
 const MainLayout = styled.div`
-//   padding: 0px 20px; 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -49,4 +48,6 @@ const Price = styled.span`
   font-weight: 600;
   margin-bottom: 32px;
   color: #212330;
+  font-family: "Pretendard";
+  font-weight: 500;
 `;
