@@ -34,7 +34,7 @@ export default function Pay() {
         setIsBtnClicked(false);
 
         function connect() {
-            const socket = new SockJS('https://52.78.8.93.nip.io:8080/ws'); // WebSocket 엔드포인트
+            const socket = new SockJS('https://52.78.8.93.nip.io/ws'); // WebSocket 엔드포인트
             const client = Stomp.over(socket); // Stomp 클라이언트 생성
 
             client.connect(
