@@ -3,17 +3,18 @@ import styled from 'styled-components';
 import MemberCell from '../entities/PayProcessing/ui/MemberCell';
 import { useNavigate } from 'react-router-dom';
 import Checking from '../shared/Checking/Checking';
-import { membersState } from '../shared/state/recoil';
-import { useRecoilValue } from 'recoil';
+import { membersState, roomIdState } from '../shared/state/recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export default function PayCompleted() {
+  const [roomId, setRoomId] = useRecoilState(roomIdState)
   const members = useRecoilValue(membersState);
 
     const arrMembers = members.map(member => member.name);
     const navigate = useNavigate();
 
     function btnClickHandler() {
-        navigate('/');
+        navigate(`/?roomId=${roomId}`);
     }
 
     return (

@@ -74,12 +74,13 @@ function AnimatedMember({ name, price, delay }) {
 }
 
 const MainLayout = styled.div`
-  padding: 0px 20px;
+  padding: 0 20px;
 `;
 
 const MainWrap = styled.div`
 display: flex;
 align-items: baseline;
+padding: 0 20px;
 `
 
 const MainTitle = styled.div`
@@ -105,10 +106,12 @@ const Price = styled.div`
   font-size: 20px;
   font-family: "Pretendard-Regular";
   margin-bottom: 32px;
+  padding: 0 20px;
 `;
 
 const ListContainer = styled.div`
   width: 100%;
+  padding: 0 20px;
 `;
 
 const AnimatedMemberCell = styled(animated.div)`

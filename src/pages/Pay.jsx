@@ -9,13 +9,13 @@ import profile from '../assets/profile_green.svg';
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import { useRecoilState } from 'recoil';
-import { membersState } from '../shared/state/recoil';
+import { membersState, roomIdState } from '../shared/state/recoil';
 import { useNavigate } from 'react-router-dom';
 
 export default function Pay() {
     const [isBtnClicked, setIsBtnClicked] = useState(true);
     const [connectionStatus, setConnectionStatus] = useState("Connecting...");
-    const [roomId, setRoomId] = useState(''); // URL에서 가져온 roomId 상태
+    const [roomId, setRoomId] = useRecoilState(roomIdState); // URL에서 가져온 roomId 상태
     const stompClient = useRef(null); // stompClient를 useRef로 관리
     const subscriptions = useRef(new Map()); // 구독 관리 (초기값: 빈 Map)
     const navigate = useNavigate()
