@@ -34,7 +34,7 @@ export default function Pay() {
         setIsBtnClicked(false);
 
         function connect() {
-            const socket = new SockJS('http://52.78.8.93:8080/ws'); // WebSocket 엔드포인트
+            const socket = new SockJS('https://52.78.8.93.nip.io:8080/ws'); // WebSocket 엔드포인트
             const client = Stomp.over(socket); // Stomp 클라이언트 생성
 
             client.connect(
@@ -76,6 +76,31 @@ export default function Pay() {
             const topicSub = stompClient.current.subscribe(topicPath, (message) => {
                 const data = JSON.parse(message.body);
                 console.log("Message received on topic:", data);
+                if(data.type == "join"){
+                    // if (!isNameDisplayed) {
+                    //     setUserData(data.result); // 처음 받은 이름을 표시
+                    //     isNameDisplayed = true; // 한 번만 실행되도록 설정
+                    //     curRoomId = roomId
+                    // }
+                    console.log(members)
+                    setMembers((prev) => [...prev, data.result]);
+                    console.log(members)
+                    
+                }
+                else if(data.type == "quit"){
+                    // deleteMember(data.result);
+                    // showGroupInfo(memberData);
+                    // checkQuit(data.result);
+                }
+                else if(data.type == "dutch"){
+                    // unsubscribeAll();
+                    // resetData();            
+                    // resetDiv();
+                }
+
+                else{
+                    console.error("알 수 없는 타입");
+                }
 
                 if (data.result) {
                     setMembers((prev) => [...prev, ...data.result]);
@@ -100,6 +125,7 @@ export default function Pay() {
     // 멤버 데이터 초기화
     const initMemberData = (data) => {
         setMembers(data.dutchMembers || []);
+        console.log("됨")
     };
 
     // Blur View 핸들러
