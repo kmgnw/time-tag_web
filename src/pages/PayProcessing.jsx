@@ -74,7 +74,6 @@ function AnimatedMember({ name, price, delay }) {
 }
 
 const MainLayout = styled.div`
-  padding: 0 20px;
 `;
 
 const MainWrap = styled.div`
@@ -112,10 +111,11 @@ const Price = styled.div`
 
 const ListContainer = styled.div`
   width: 100%;
-  padding: 0 20px;
+  // padding: 0 20px;
 `;
 
 const AnimatedMemberCell = styled(animated.div)`
-  width: 100%;
+  width: 90%;
   margin-bottom: 5px;
+  padding-left: 20px;
 `;

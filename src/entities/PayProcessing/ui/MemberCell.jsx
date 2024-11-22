@@ -16,11 +16,12 @@ export default function MemberCell({ name, price }) {
 }
 
 const MainLayout = styled.div`
+  
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   margin-bottom: 5px
 `;
 
