@@ -22,7 +22,7 @@ export default function PayProcessing() {
 
     const timer = setTimeout(() => {
       navigate('/pay-completed');
-    }, totalTime);
+    }, totalTime+1000);
 
     return () => clearTimeout(timer);
   }, [navigate, members]);
@@ -42,7 +42,7 @@ export default function PayProcessing() {
         <Loading />
       </MainWrap>
 
-      <Price>총 금액: 120,000원</Price>
+      <Price>총 금액: {20000*members.length}원</Price>
 
       <ListContainer>
         {arrMembers.map((member, index) => (
@@ -87,9 +87,9 @@ const MainTitle = styled.div`
   color: #212330;
   font-family: "Pretendard";
   font-weight: 600;
-  font-size: 36px;
+  font-size: 8vw;
   font-style: normal;
-  line-height: 44px; /* 122.222% */
+  line-height: 10vw; /* 122.222% */
   letter-spacing: -0.9px;
   margin-top: 110px;
   margin-bottom: 24px;
@@ -102,9 +102,9 @@ padding: 20px
 `
 
 const Price = styled.div`
-  font-size: 20px;
+  font-size: 5vw;
   font-family: "Pretendard";
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 32px;
   padding: 0 20px;
 `;
